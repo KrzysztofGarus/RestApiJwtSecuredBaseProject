@@ -16,9 +16,9 @@ import java.util.function.Function;
 @Service
 public class JWTServiceImpl implements JWTService {
 
-    private String generateToken(UserDetails userDetails){
+    public String generateToken(UserDetails userDetails){
         /**
-         *  Setting token expiration time to 1 day (24hrs*60min*60sec*1000ms)
+         *  Setting token expiration time set to 1 day (24hrs*60min*60sec*1000ms)
          */
         long tokenValidTime = 24L * 60L * 60L * 1000L;
 
@@ -27,6 +27,14 @@ public class JWTServiceImpl implements JWTService {
                 .setExpiration(new Date(System.currentTimeMillis() + tokenValidTime))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
+    }
+    public boolean isTokenValid(String token, UserDetails userDetails) {
+        final String username = extractUserName(token);
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    }
+
+    private boolean isTokenExpired(String token){
+        return  extractClaim(token, Claims::getExpiration).before(new Date());
     }
 
     public String extractUserName(String token){
