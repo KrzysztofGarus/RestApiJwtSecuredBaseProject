@@ -1,4 +1,4 @@
-package pl.someday.FishingAppRestApi;
+package pl.someday.RestApiJwtSecuredBaseProject;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

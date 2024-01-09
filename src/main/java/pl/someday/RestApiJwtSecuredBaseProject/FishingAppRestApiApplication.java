@@ -1,4 +1,4 @@
-package pl.someday.FishingAppRestApi;
+package pl.someday.RestApiJwtSecuredBaseProject;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

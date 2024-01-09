@@ -1,4 +1,4 @@
-package pl.someday.FishingAppRestApi.config;
+package pl.someday.RestApiJwtSecuredBaseProject.config;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -12,9 +12,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import pl.someday.FishingAppRestApi.service.JWTService;
+import pl.someday.RestApiJwtSecuredBaseProject.service.JWTService;
 import org.apache.commons.lang3.StringUtils;
-import pl.someday.FishingAppRestApi.service.UserService;
+import pl.someday.RestApiJwtSecuredBaseProject.service.UserService;
 
 import java.io.IOException;
 

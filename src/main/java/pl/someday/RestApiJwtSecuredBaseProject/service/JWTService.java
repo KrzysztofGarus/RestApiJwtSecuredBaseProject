@@ -1,9 +1,6 @@
-package pl.someday.FishingAppRestApi.service;
+package pl.someday.RestApiJwtSecuredBaseProject.service;
 
 import org.springframework.security.core.userdetails.UserDetails;
-import pl.someday.FishingAppRestApi.model.User;
-
-import java.util.HashMap;
 
 public interface JWTService {
 

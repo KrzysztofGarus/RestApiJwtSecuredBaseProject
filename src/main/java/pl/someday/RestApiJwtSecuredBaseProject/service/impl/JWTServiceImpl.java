@@ -1,4 +1,4 @@
-package pl.someday.FishingAppRestApi.service.impl;
+package pl.someday.RestApiJwtSecuredBaseProject.service.impl;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -7,7 +7,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import pl.someday.FishingAppRestApi.service.JWTService;
+import pl.someday.RestApiJwtSecuredBaseProject.service.JWTService;
 
 import java.security.Key;
 import java.util.Date;

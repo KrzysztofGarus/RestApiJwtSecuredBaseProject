@@ -1,4 +1,4 @@
-package pl.someday.FishingAppRestApi.dto;
+package pl.someday.RestApiJwtSecuredBaseProject.dto;
 
 import lombok.Data;
 

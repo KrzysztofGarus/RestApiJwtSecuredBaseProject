@@ -1,4 +1,4 @@
-package pl.someday.FishingAppRestApi.config;
+package pl.someday.RestApiJwtSecuredBaseProject.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -15,8 +15,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import pl.someday.FishingAppRestApi.model.Role;
-import pl.someday.FishingAppRestApi.service.UserService;
+import pl.someday.RestApiJwtSecuredBaseProject.model.Role;
+import pl.someday.RestApiJwtSecuredBaseProject.service.UserService;
 
 @Configuration
 @EnableWebSecurity

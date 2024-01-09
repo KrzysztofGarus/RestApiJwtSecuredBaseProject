@@ -1,18 +1,18 @@
-package pl.someday.FishingAppRestApi.service.impl;
+package pl.someday.RestApiJwtSecuredBaseProject.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.someday.FishingAppRestApi.dto.JWTAuthenticationResponse;
-import pl.someday.FishingAppRestApi.dto.SignUpRequest;
-import pl.someday.FishingAppRestApi.dto.SingInRequest;
-import pl.someday.FishingAppRestApi.model.Role;
-import pl.someday.FishingAppRestApi.model.User;
-import pl.someday.FishingAppRestApi.repository.UserRepository;
-import pl.someday.FishingAppRestApi.service.AuthenticationService;
-import pl.someday.FishingAppRestApi.service.JWTService;
+import pl.someday.RestApiJwtSecuredBaseProject.dto.JWTAuthenticationResponse;
+import pl.someday.RestApiJwtSecuredBaseProject.dto.SignUpRequest;
+import pl.someday.RestApiJwtSecuredBaseProject.dto.SingInRequest;
+import pl.someday.RestApiJwtSecuredBaseProject.model.Role;
+import pl.someday.RestApiJwtSecuredBaseProject.model.User;
+import pl.someday.RestApiJwtSecuredBaseProject.repository.UserRepository;
+import pl.someday.RestApiJwtSecuredBaseProject.service.AuthenticationService;
+import pl.someday.RestApiJwtSecuredBaseProject.service.JWTService;
 
 @Service
 @RequiredArgsConstructor

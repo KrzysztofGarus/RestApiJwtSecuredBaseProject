@@ -1,8 +1,8 @@
-package pl.someday.FishingAppRestApi.repository;
+package pl.someday.RestApiJwtSecuredBaseProject.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.someday.FishingAppRestApi.model.User;
+import pl.someday.RestApiJwtSecuredBaseProject.model.User;
 
 import java.util.Optional;
 

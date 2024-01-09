@@ -1,4 +1,4 @@
-package pl.someday.FishingAppRestApi.model;
+package pl.someday.RestApiJwtSecuredBaseProject.model;
 
 import jakarta.persistence.*;
 import lombok.Data;

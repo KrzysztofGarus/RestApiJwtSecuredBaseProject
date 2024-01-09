@@ -1,12 +1,12 @@
-package pl.someday.FishingAppRestApi.service.impl;
+package pl.someday.RestApiJwtSecuredBaseProject.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import pl.someday.FishingAppRestApi.repository.UserRepository;
-import pl.someday.FishingAppRestApi.service.UserService;
+import pl.someday.RestApiJwtSecuredBaseProject.repository.UserRepository;
+import pl.someday.RestApiJwtSecuredBaseProject.service.UserService;
 
 @Service
 @RequiredArgsConstructor
