@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>pl.someday</groupId>
-	<artifactId>FishingAppRestApi</artifactId>
+	<artifactId>RestApiJwtBaseProject</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>FishingAppRestApi</name>
 	<description>REST API for FishingApp with JWT</description>
