@@ -16,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import pl.someday.RestApiJwtSecuredBaseProject.model.Role;
-import pl.someday.RestApiJwtSecuredBaseProject.service.UserService;
+import pl.someday.RestApiJwtSecuredBaseProject.service.CustomUserService;
 
 @Configuration
 @EnableWebSecurity
@@ -24,7 +24,7 @@ import pl.someday.RestApiJwtSecuredBaseProject.service.UserService;
 public class SecurityConfig {
 
     private final JWTAuthenticationFilter jwtAuthenticationFilter;
-    private final UserService userService;
+    private final CustomUserService userService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

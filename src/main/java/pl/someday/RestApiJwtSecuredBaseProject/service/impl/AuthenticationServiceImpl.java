@@ -19,6 +19,7 @@ import pl.someday.RestApiJwtSecuredBaseProject.service.JWTService;
 public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final PasswordEncoder passwordEncoder;
+    private final CustomUserServiceImpl customUserServiceImpl;
     private final UserRepository userRepository;
     private final AuthenticationManager authenticationManager;
     private final JWTService jwtService;
@@ -26,7 +27,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public void signUp(SignUpRequest signUpRequest) {
         User user = new User();
 
-        user.setEmail(signUpRequest.getEmail());
+        user.setUsername(signUpRequest.getUsername());
         user.setFirstName(signUpRequest.getFirstName());
         user.setLastName(signUpRequest.getLastName());
         user.setRole(Role.USER);
@@ -36,10 +37,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     public JWTAuthenticationResponse signIn(SingInRequest singInRequest) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(singInRequest.getEmail(),
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(singInRequest.getUsername(),
                 singInRequest.getPassword()));
-        var user = userRepository.findByEmail(singInRequest.getEmail()).orElseThrow(()->new IllegalArgumentException("Invalid email or password"));
-        var jwt = jwtService.generateToken(user);
+        var CustomUser = customUserServiceImpl.userDetailsService().loadUserByUsername(singInRequest.getUsername());
+        var jwt = jwtService.generateToken(CustomUser);
 
         JWTAuthenticationResponse jwtAuthenticationResponse = new JWTAuthenticationResponse();
         jwtAuthenticationResponse.setToken(jwt);

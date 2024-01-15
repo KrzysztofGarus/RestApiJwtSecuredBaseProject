@@ -12,9 +12,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import pl.someday.RestApiJwtSecuredBaseProject.service.CustomUserService;
 import pl.someday.RestApiJwtSecuredBaseProject.service.JWTService;
 import org.apache.commons.lang3.StringUtils;
-import pl.someday.RestApiJwtSecuredBaseProject.service.UserService;
 
 import java.io.IOException;
 
@@ -23,7 +24,7 @@ import java.io.IOException;
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
     private final JWTService jwtService;
-    private final UserService userService;
+    private final CustomUserService userService;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         int SubstringStartIndexForJWT = 7;
