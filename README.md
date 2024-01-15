@@ -5,6 +5,7 @@
 - Spring Boot
 - Spring Data JPA
 - Spring Security
+- Spring Web MVC
 - Hibernate
 - MySQL
 - Lombok
