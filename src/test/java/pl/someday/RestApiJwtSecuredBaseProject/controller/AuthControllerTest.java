@@ -8,10 +8,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+
+import pl.someday.RestApiJwtSecuredBaseProject.dto.JWTAuthenticationResponse;
 import pl.someday.RestApiJwtSecuredBaseProject.dto.SignUpRequest;
+import pl.someday.RestApiJwtSecuredBaseProject.dto.SingInRequest;
 import pl.someday.RestApiJwtSecuredBaseProject.service.AuthenticationService;
 
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -44,5 +48,22 @@ public class AuthControllerTest {
                 .content(objectMapper.writeValueAsString(signUpRequest)))
                 .andExpect(status().isOk())
                 .andExpect(content().string("User account created"));
+    }
+
+    @Test
+    public void signInTest() throws Exception {
+        SingInRequest signInRequest = new SingInRequest();
+        signInRequest.setUsername("user");
+        signInRequest.setPassword("user");
+
+        JWTAuthenticationResponse expectedResponse = new JWTAuthenticationResponse("token");
+
+        when(authenticationService.signIn(signInRequest)).thenReturn(expectedResponse);
+
+        mockMvc.perform(post("/api/auth/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(signInRequest)))
+                .andExpect(status().isOk())
+                .andExpect(content().json(objectMapper.writeValueAsString(expectedResponse)));
     }
 }
