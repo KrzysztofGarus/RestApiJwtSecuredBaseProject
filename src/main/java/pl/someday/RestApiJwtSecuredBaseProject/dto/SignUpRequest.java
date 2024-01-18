@@ -11,14 +11,14 @@ public class SignUpRequest {
 
     @Valid
 
-    @NotBlank
+    @NotBlank(message = "First name cannot be blank")
     private String firstName;
-    @NotBlank
+    @NotBlank(message = "Last name cannot be blank")
     private String lastName;
-    @Email(message = "Invalid email address")
+    @Email(message = "Email should be valid")
     private String username;
     @NotBlank
-    @Size(min = 6, max = 30, message = "Password must be between 6 and 30 characters long")
+    @Size(min = 8, max = 30, message = "Password must be between 6 and 30 characters long")
     private String password;
 
 }
