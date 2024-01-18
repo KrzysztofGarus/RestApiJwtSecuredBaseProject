@@ -5,11 +5,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.someday.RestApiJwtSecuredBaseProject.dto.JWTAuthenticationResponse;
 import pl.someday.RestApiJwtSecuredBaseProject.dto.SignUpRequest;
 import pl.someday.RestApiJwtSecuredBaseProject.dto.SingInRequest;
+import pl.someday.RestApiJwtSecuredBaseProject.exception.CustomUsernameNotFoundException;
 import pl.someday.RestApiJwtSecuredBaseProject.exception.UsernameAlreadyExistsException;
 import pl.someday.RestApiJwtSecuredBaseProject.model.Role;
 import pl.someday.RestApiJwtSecuredBaseProject.model.User;
@@ -29,7 +31,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     public void signUp(SignUpRequest signUpRequest) throws UsernameAlreadyExistsException {
         String username = signUpRequest.getUsername();
-        if (isUsernameAlreadySigned(username)) throw new UsernameAlreadyExistsException();
+        if (customUserServiceImpl.isUsernameAlreadySigned(username)) throw new UsernameAlreadyExistsException();
         User user = new User();
         user.setUsername(username);
         user.setFirstName(signUpRequest.getFirstName());
@@ -39,10 +41,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         userRepository.save(user);
     }
 
-    public JWTAuthenticationResponse signIn(SingInRequest singInRequest) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(singInRequest.getUsername(),
+    public JWTAuthenticationResponse signIn(SingInRequest singInRequest) throws CustomUsernameNotFoundException {
+        String username = singInRequest.getUsername();
+        if (!customUserServiceImpl.doesUserExist(username)) throw new CustomUsernameNotFoundException(username);
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username,
                 singInRequest.getPassword()));
-        var CustomUser = customUserServiceImpl.userDetailsService().loadUserByUsername(singInRequest.getUsername());
+        var CustomUser = customUserServiceImpl.userDetailsService().loadUserByUsername(username);
         var jwt = jwtService.generateToken(CustomUser);
 
         JWTAuthenticationResponse jwtAuthenticationResponse = new JWTAuthenticationResponse();
@@ -51,7 +55,5 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         return jwtAuthenticationResponse;
     }
 
-    public boolean isUsernameAlreadySigned(String username) {
-        return userRepository.findByUsername(username).isPresent();
-    }
+    
 }
