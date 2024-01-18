@@ -2,9 +2,7 @@ package pl.someday.RestApiJwtSecuredBaseProject.controller;
 
 import lombok.RequiredArgsConstructor;
 
-
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +26,6 @@ public class AuthController {
     public ResponseEntity<String> signUp(@RequestBody @Valid SignUpRequest signUpRequest){
         authenticationService.signUp(signUpRequest);
         return ResponseEntity.created(null).body("User registered successfully");
-
     }
 
     @PostMapping("/login")
