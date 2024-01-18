@@ -2,12 +2,11 @@ package pl.someday.RestApiJwtSecuredBaseProject.service.impl;
 
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import pl.someday.RestApiJwtSecuredBaseProject.dto.JWTAuthenticationResponse;
 import pl.someday.RestApiJwtSecuredBaseProject.dto.SignUpRequest;
 import pl.someday.RestApiJwtSecuredBaseProject.dto.SingInRequest;

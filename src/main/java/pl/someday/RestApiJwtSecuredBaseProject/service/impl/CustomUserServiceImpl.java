@@ -34,10 +34,12 @@ public class CustomUserServiceImpl implements CustomUserService {
         };
     }
 
+    @Override
     public boolean doesUserExist(String username) {
         return userRepository.findByUsername(username).isPresent();
     }
 
+    @Override
     public boolean isUsernameAlreadySigned(String username) {
         return userRepository.findByUsername(username).isPresent();
     }
