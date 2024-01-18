@@ -1,5 +1,6 @@
 package pl.someday.RestApiJwtSecuredBaseProject.model;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -21,6 +22,8 @@ public class User {
     private String lastName;
 
     @NotBlank
+    @Email
+    @Column(unique = true)
     private String username;
 
     @NotBlank

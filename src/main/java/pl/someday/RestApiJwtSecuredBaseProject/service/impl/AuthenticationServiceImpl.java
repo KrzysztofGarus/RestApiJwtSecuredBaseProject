@@ -1,6 +1,8 @@
 package pl.someday.RestApiJwtSecuredBaseProject.service.impl;
 
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 import pl.someday.RestApiJwtSecuredBaseProject.dto.JWTAuthenticationResponse;
 import pl.someday.RestApiJwtSecuredBaseProject.dto.SignUpRequest;
 import pl.someday.RestApiJwtSecuredBaseProject.dto.SingInRequest;
+import pl.someday.RestApiJwtSecuredBaseProject.exception.UsernameAlreadyExistsException;
 import pl.someday.RestApiJwtSecuredBaseProject.model.Role;
 import pl.someday.RestApiJwtSecuredBaseProject.model.User;
 import pl.someday.RestApiJwtSecuredBaseProject.repository.UserRepository;
@@ -24,15 +27,15 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final JWTService jwtService;
 
-    public void signUp(SignUpRequest signUpRequest) {
+    public void signUp(SignUpRequest signUpRequest) throws UsernameAlreadyExistsException {
+        String username = signUpRequest.getUsername();
+        if (isUsernameAlreadySigned(username)) throw new UsernameAlreadyExistsException();
         User user = new User();
-
-        user.setUsername(signUpRequest.getUsername());
+        user.setUsername(username);
         user.setFirstName(signUpRequest.getFirstName());
         user.setLastName(signUpRequest.getLastName());
         user.setRole(Role.USER);
         user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
-
         userRepository.save(user);
     }
 
@@ -46,7 +49,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         jwtAuthenticationResponse.setToken(jwt);
 
         return jwtAuthenticationResponse;
-
     }
 
+    public boolean isUsernameAlreadySigned(String username) {
+        return userRepository.findByUsername(username).isPresent();
+    }
 }
