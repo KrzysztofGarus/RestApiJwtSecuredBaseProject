@@ -29,22 +29,22 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final JWTService jwtService;
 
     public void signUp(SignUpRequest signUpRequest) throws UsernameAlreadyExistsException {
-        String username = signUpRequest.getUsername();
+        String username = signUpRequest.username();
         if (customUserServiceImpl.isUsernameAlreadySigned(username)) throw new UsernameAlreadyExistsException();
         User user = new User();
         user.setUsername(username);
-        user.setFirstName(signUpRequest.getFirstName());
-        user.setLastName(signUpRequest.getLastName());
+        user.setFirstName(signUpRequest.firstName());
+        user.setLastName(signUpRequest.lastName());
         user.setRole(Role.USER);
-        user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
+        user.setPassword(passwordEncoder.encode(signUpRequest.password()));
         userRepository.save(user);
     }
 
     public JWTAuthenticationResponse signIn(SingInRequest singInRequest) throws CustomUsernameNotFoundException {
-        String username = singInRequest.getUsername();
+        String username = singInRequest.username(); 
         if (!customUserServiceImpl.doesUserExist(username)) throw new CustomUsernameNotFoundException(username);
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username,
-                singInRequest.getPassword()));
+                singInRequest.password()));
         var CustomUser = customUserServiceImpl.userDetailsService().loadUserByUsername(username);
         var jwt = jwtService.generateToken(CustomUser);
 

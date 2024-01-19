@@ -35,26 +35,20 @@ public class AuthControllerTest {
 
     @Test
     public void signUpTest() throws Exception {
-        SignUpRequest signUpRequest = new SignUpRequest();
-        signUpRequest.setFirstName("user");
-        signUpRequest.setLastName("user");
-        signUpRequest.setUsername("user");
-        signUpRequest.setPassword("user");
+        SignUpRequest signUpRequest = new SignUpRequest("user", "user", "user@aaaaa", "useruser");
 
         doNothing().when(authenticationService).signUp(signUpRequest);
 
         mockMvc.perform(post("/api/auth/register")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(signUpRequest)))
-                .andExpect(status().isOk())
-                .andExpect(content().string("User account created"));
+                .andExpect(status().isCreated())
+                .andExpect(content().string("User registered successfully"));
     }
 
     @Test
     public void signInTest() throws Exception {
-        SingInRequest signInRequest = new SingInRequest();
-        signInRequest.setUsername("user");
-        signInRequest.setPassword("user");
+        SingInRequest signInRequest = new SingInRequest("user@aaaaa", "useruser");
 
         JWTAuthenticationResponse expectedResponse = new JWTAuthenticationResponse("token");
 
