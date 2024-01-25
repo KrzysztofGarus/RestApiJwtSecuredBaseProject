@@ -20,7 +20,7 @@ import pl.someday.RestApiJwtSecuredBaseProject.service.AuthenticationService;
 @RequiredArgsConstructor
 public class AuthController {
 
-    private final AuthenticationService authenticationService;
+    private final AuthenticationServiceImpl authenticationService;
 
     @PostMapping("/register")
     public ResponseEntity<String> signUp(@RequestBody @Valid SignUpRequest signUpRequest){
