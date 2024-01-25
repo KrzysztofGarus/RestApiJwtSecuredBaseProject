@@ -12,7 +12,7 @@ import jakarta.validation.Valid;
 import pl.someday.RestApiJwtSecuredBaseProject.dto.JWTAuthenticationResponse;
 import pl.someday.RestApiJwtSecuredBaseProject.dto.SignUpRequest;
 import pl.someday.RestApiJwtSecuredBaseProject.dto.SingInRequest;
-import pl.someday.RestApiJwtSecuredBaseProject.service.AuthenticationService;
+import pl.someday.RestApiJwtSecuredBaseProject.service.AuthenticationServiceImpl;
 
 
 @RestController
